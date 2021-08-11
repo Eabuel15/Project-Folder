@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>California Wildfires</title>
+  
+  <!-- D3 library -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
+
+  <!-- Leaflet JavaScript code -->
+  <script src="https://unpkg.com/leaflet@1.7.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script>
+
+  <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 jumbotron text-center">
+                <h1>The Wildfires of California</h1>
+                <p>Use the interactive map below to explore our dataset.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="well">
+                  <h5>Year</h5>
+                  <select id="selDataset" onchange="optionchanged(this.value)"></select>
+                </div>
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Demographic Info</h3>
+                  </div>
+                  <div id="sample-metadata" class="panel-body"></div>
+                </div>
+              </div>
+              <!-- Visualization for Top Fires by Acres Burned -->
+              <div class="col-md-5">
+                <div id="bar"></div>
+              </div>
+              <!-- Visualization for Top Fires by Duration -->
+              <div class="col-md-5">
+                <div id="bar"></div>
+              </div>
+            </div>
+            <!-- map image placeholder -->
+            <div class="row">
+              <div class="col-md-12">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+    </div>
+  <!-- Our JavaScript file -->
+  <script type="text/javascript" src="logic.js"></script>
+</body>
+
+</html>
+                             
