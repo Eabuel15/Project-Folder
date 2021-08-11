@@ -1,21 +1,25 @@
 function optionChanged(selectedYear) {
 
-    var streetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+   var streetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
       
     });
 
-    console.log(selectedYear);
-    d3.json('geojson file of data').then(function(data) {
+   //  Temporary holder for json file
+   var geoURL = "https://raw.githubusercontent.com/i-am-phoenix/project3/main/fire_data.json#";
+   console.log(selectedYear);
+   d3.json(geoURL).then(function(data) {
 
-    d3.select('#selDataset').html('');
+      d3.select('#selDataset').html('');
 
-    data.metadata.forEach(item => {
-          d3.select('#selDataset').append('option').attribution('value', item.id).text(item.id);
+      data.metadata.forEach(item => {
+         d3.select('#selDataset').append('option').attr('value', item.id).text(item.id);
     });
 
+
+// SECTION TO DETERMINE INFO OUTPUT BASED ON YEAR
 d3.select('#selDataset').node().value = selectedYear;
-const idMetadata = data.metadata.filter(item => (item.id == selectedID));
+const idYear = data.properties.filter(item => (item.archiveyear == selectedYear));
   // {
        //    console.log("------------------------")
        //    console.log(item);
@@ -33,10 +37,10 @@ const idMetadata = data.metadata.filter(item => (item.id == selectedID));
           panelDisplay.append("p").text(`${item[0]}: ${item[1]}`)
        });
  
-    // BAR CHART
+    // BAR CHART FOR TOP FIRES DURATION
  
     // Filter sample array data for the selected ID
-    const idSample = data.samples.filter(item => parseInt(item.id) == selectedID);
+    const idSample = data.samples.filter(item => parseInt(item.id) == selectedYear);
     
     // // Check values
     // console.log(typeof parseInt(item.id));
@@ -44,7 +48,7 @@ const idMetadata = data.metadata.filter(item => (item.id == selectedID));
     // console.log(idSample[0].otu_ids);  
     // console.log(idSample[0].otu_labels);  
     
-    // Slice top 10 sample values
+    // Slice top 10 wildfires by acres burned
     var sampleValue = idSample[0].sample_values.slice(0,10);
     sampleValue= sampleValue.reverse();
     var otuID = idSample[0].otu_ids.slice(0,10);
@@ -76,9 +80,9 @@ const idMetadata = data.metadata.filter(item => (item.id == selectedID));
         }
        },
        layout = {
-       title: 'Top 10 Operational Taxonomic Units (OTU)/Individual',
-       xaxis: {title: 'Number of Samples Collected'},
-       yaxis: {title: 'OTU ID'}
+       title: 'Top California Wildfires by Acres Burned',
+       xaxis: {title: 'Acres Burned'},
+       yaxis: {title: 'Wildfires'}
        };
  
        // Plot using Plotly
@@ -114,9 +118,9 @@ const idMetadata = data.metadata.filter(item => (item.id == selectedID));
  // Plot using Plotly
  Plotly.newPlot('bubble', [trace1], layout1);
  
- // BONUS: GAUGE CHART
+ // THIRD CHART ON THE RIGHT
 
- // Gauge Chart to plot weekly washing frequency 
+ // TOP FIRES BY ACRES 
  const guageDisplay = d3.select("#gauge");
  guageDisplay.html(""); 
  const washFreq = idMetadata[0].wfreq;
