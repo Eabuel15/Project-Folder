@@ -1,24 +1,22 @@
+// Dropdown function options
 function optionChanged(selectedYear) {
 
-   var streetmap = L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      
-    });
-
    //  Temporary holder for json file
-   var geoURL = "https://raw.githubusercontent.com/i-am-phoenix/project3/main/fire_data.json#";
+   var geoURL = "https://raw.githubusercontent.com/i-am-phoenix/project3/main/top_fires_acres.json";
    console.log(selectedYear);
+   console.log(geoURL)
    d3.json(geoURL).then(function(data) {
 
       d3.select('#selDataset').html('');
 
-      data.metadata.forEach(item => {
-         d3.select('#selDataset').append('option').attr('value', item.id).text(item.id);
-    });
+      data.properties.forEach(item => {
+         d3.select('#selDataset').append('option').attr('value', item.archiveyear).text(item.archiveyear);
+   });
 
 
 // SECTION TO DETERMINE INFO OUTPUT BASED ON YEAR
 d3.select('#selDataset').node().value = selectedYear;
+
 const idYear = data.properties.filter(item => (item.archiveyear == selectedYear));
   // {
        //    console.log("------------------------")
@@ -27,11 +25,11 @@ const idYear = data.properties.filter(item => (item.archiveyear == selectedYear)
           
        // });
     // Check the metadata loaded for the selected ID
-    console.log(idMetadata);
+    console.log(idYear);
     
-    const panelDisplay = d3.select("#sample-metadata");
+    const panelDisplay = d3.select("#features-properties");
     panelDisplay.html("");
-    Object.entries(idMetadata[0]).forEach(item=> 
+    Object.entries(idYear[0]).forEach(item=> 
        {
           // console.log(item);
           panelDisplay.append("p").text(`${item[0]}: ${item[1]}`)
@@ -40,7 +38,7 @@ const idYear = data.properties.filter(item => (item.archiveyear == selectedYear)
     // BAR CHART FOR TOP FIRES DURATION
  
     // Filter sample array data for the selected ID
-    const idSample = data.samples.filter(item => parseInt(item.id) == selectedYear);
+    const idInitial = data.properties.filter(item => parseInt(item.archiveyear) == selectedYear);
     
     // // Check values
     // console.log(typeof parseInt(item.id));
@@ -49,17 +47,17 @@ const idYear = data.properties.filter(item => (item.archiveyear == selectedYear)
     // console.log(idSample[0].otu_labels);  
     
     // Slice top 10 wildfires by acres burned
-    var sampleValue = idSample[0].sample_values.slice(0,10);
-    sampleValue= sampleValue.reverse();
-    var otuID = idSample[0].otu_ids.slice(0,10);
-    otuID = otuID.reverse();
-    var otuLabels = idSample[0].otu_labels
-    otuLabels = otuLabels.reverse();
+    var arces_burned = idInitial[0].sample_values.slice(0,10);
+    arces_burned= arces_burned.reverse();
+    var fireNames = idInitial[0].otu_ids.slice(0,10);
+    fireNames = fireNames.reverse();
+    var fire_labels = idInitial[0].fire_labels
+    fire_labels = fire_labels.reverse();
  
     // // Check values
-    //  console.log(sampleValue);
-    //  console.log(otuID);
-    //  console.log(otuLabels);
+     console.log(arces_burned);
+     console.log(fireNames);
+     console.log(fire_labels);
  
     // Y axis of bar chart
     const yAxis = otuID.map(item => 'OTU' + " " + item);
@@ -68,10 +66,10 @@ const idYear = data.properties.filter(item => (item.archiveyear == selectedYear)
     // Define the layout and trace object, edit color and orientation
        const trace = {
        y: yAxis,
-       x: sampleValue,
+       x: arces_burned,
        type: 'bar',
        orientation: "h",
-       text:  otuLabels,
+       text:  fire_labels,
        marker: {
           color: 'rgb(154, 140, 152)',
           line: {
@@ -88,7 +86,7 @@ const idYear = data.properties.filter(item => (item.archiveyear == selectedYear)
        // Plot using Plotly
        Plotly.newPlot('bar', [trace], layout,  {responsive: true});    
        
- // BUBBLE CHART
+ // LEAFLET MAP
  
  // Remove Sample value and otuID from individual
  var sampleValue1 =idSample[0].sample_values;
@@ -120,6 +118,7 @@ const idYear = data.properties.filter(item => (item.archiveyear == selectedYear)
  
  // THIRD CHART ON THE RIGHT
 
+//  BONUS FROM THE HW LOOK LATER
  // TOP FIRES BY ACRES 
  const guageDisplay = d3.select("#gauge");
  guageDisplay.html(""); 
@@ -164,9 +163,32 @@ const idYear = data.properties.filter(item => (item.archiveyear == selectedYear)
  });
 }
 // Initial viewing starts at the year 2013
+function init() {
+   // Grab a reference to the dropdown select element
+   var selector = d3.select("#selDataset");
+ 
+   // Use the list of sample names to populate the select options
+   d3.json("samples.json").then((data) => {
+     var sampleNames = data.names;
+ 
+     sampleNames.forEach((sample) => {
+       selector
+         .append("option")
+         .text(sample)
+         .property("value", sample);
+     });
+ 
+     // Use the first sample from the list to build the initial plots
+     var firstSample = sampleNames[0];
+     buildCharts(firstSample);
+     buildMetadata(firstSample);
+   });
+ }
+ 
+ 
 optionChanged(2013);
 
 // Event on change takes value and calls the function during dropdown selection
 d3.select('#selDataset').optionChanged('change',() => {
-    optionChanged(d3.event.target.value);
+   optionChanged(d3.event.target.value);
 })
