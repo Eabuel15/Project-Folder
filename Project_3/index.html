@@ -47,7 +47,7 @@
                 </div> -->
                 <div class="panel panel-primary">
                   <div class="panel-heading">
-                    <h3 class="panel-title">Fire Info</h3>
+                    <h3 class="panel-title">Charts for Fires</h3>
                   </div>
                   <div id="features-properties" class="panel-body"></div>
                 </div>
@@ -56,19 +56,20 @@
               <div class="container">
                 <div class="row">                  
                   <div class="col-md-5" style="max-height: 400px; max-width: 400px;"> -->
-                    <p>Select year to review: <select id="selYear"></select></p>
-                    <h4 style="text-align: center;">Top 10 fires<br>by Duration</h4>
+                    <h4>Select year to review: <select id="selYear"></select></h4>
+                    <h4 style="text-align: center;">Top 10 fires in Dataset<br>by Duration</h4>
                     <canvas id="myChart"></canvas>
                   </div>
                   <div class="col-md-8 offset-md-2">
                   </div>
                 </div>
               <!-- Visualization for Top Fires by Acres Burned -->
+              
               <div class="container-fluid">
                 <div class="row">
                   <div class="col-md-5" style="max-height: 400px; max-width: 400px;""> -->
-                    <p>Select year to review: <select id="selYear"></select></p>
-                    <h4 style="text-align: center;">Top 10 fires<br>by Acres Burned</h4>
+                    <h4>Select year to review: <select id="selYearAcres"></select></h4>
+                    <h4 style="text-align: center;">Top 10 fires in Dataset<br>by Acres Burned</h4>
                     <canvas id="myAcreChart"></canvas>
                   </div>
                                  
@@ -84,7 +85,7 @@
     
     <!-- Generate California Map -->
     <h1>Map of California</h1>
-    <div id="map"></div>
+    <!-- <div id="map"></div> -->
    
     <h2>Select a Year</h2>
     
@@ -98,7 +99,7 @@
         <option value="2018">Year 2018</option>
         <option value="2019">Year 2019</option>
       </select>
-    
+    <div id="map"></div>
     
       <!-- JavaScript file -->
       <!-- <script type="text/javascript" src="logic.js"></script> -->

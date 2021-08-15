@@ -4,7 +4,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
  
     // Function to add year selections as HTML element
     function addSelection(individualYear) {
-        var selection = d3.select("#selYear");//document.getElementById("selYear");
+        var selection = d3.select("#selYearAcres");//document.getElementById("selYear");
         var option = selection.append("option").text(individualYear).property("value",individualYear)//document.createElement("option");
         // option.appendChild(document.createTextNode(individualYear));
         // selection.appendChild(option);
@@ -20,7 +20,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
     };
 
     // Call when change takes place to the DOM
-    d3.select("#selYear").on("change", updateBarChart);
+    d3.select("#selYearAcres").on("change", updateBarChart);
  
     var myAcreChart;
 
@@ -51,7 +51,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
         
         var labels = [];
         var values = [];
-        var selectedYear = 2017
+        var selectedYear = 2013
 
         for (i=0; i < data.features.length; i++) {
 
@@ -99,7 +99,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
 
     function updateBarChart() {
 
-        var dropdownMenu = d3.select("#selYear");
+        var dropdownMenu = d3.select("#selYearAcres");
   
         // Assign the value of the dropdown menu option to a variable
         var selectedYear = dropdownMenu.node().value//property("value");

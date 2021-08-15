@@ -50,11 +50,11 @@ d3.json(fire_data).then(function(data) {
        // push to a layer to draw
        let fire = L.circle([data.features[i].geometry.coordinates[1], data.features[i].geometry.coordinates[0]], {
          fillOpacity: 0.4,
-         color: "turquoise",
-         fillColor: "turquoise",
+         color: "orange",
+         fillColor: "orange",
        // Setting our circle's radius to equal the output of our markerSize() function:
          radius: markerSize(data.features[i].properties.acresburned)
-       }).bindPopup(`<h4>Name: ${data.features[i].properties.firename}</h4><h5>Duration: ${data.features[i].properties.duration}</h5>`)
+       }).bindPopup(`<h4>Name: ${data.features[i].properties.firename}</h4><h5>Duration (Days): ${data.features[i].properties.duration}</h5>`)
        //push to make a layer for display
        yearlist.push(fire);
        }
