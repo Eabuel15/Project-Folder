@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>California Wildfires</title>
+  
+  <!-- D3 library -->
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+  <!-- Leaflet JavaScript code -->
+  <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+
+  <!-- Leaflet JavaScript code -->
+  <!-- <script src="https://unpkg.com/leaflet@1.7.3/dist/leaflet.js"
+  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+  crossorigin=""></script> -->
+
+  <!-- Chart.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" 
+  integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+  
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 jumbotron text-center">
+                <h1>The Wildfires of California</h1>
+                <p>Use the interactive map below to explore our dataset.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <div class="well">
+                  <!-- <select id="selDataset" onchange="optionChanged(this.value)"></select> -->
+                </div>
+                <div class="panel panel-primary">
+                  <div class="panel-heading">
+                    <h3 class="panel-title">Fire Info</h3>
+                  </div>
+                  <div id="features-properties" class="panel-body"></div>
+                </div>
+              </div>
+              <!-- Visualization for Top Fires by Duration -->
+              <div class="container-fluid">
+                <div class="row">                  
+                  <div class="col-sm-2" style="max-height: 400px;"> -->
+                    <p>Select year to review: <select id="selYear"></select></p>
+                    <h4 style="text-align: center;">Top 10 fires<br>by Duration</h4>
+                    <canvas id="myChart"></canvas>
+                  </div>
+                  <div class="col-md-8 offset-md-2">
+                  </div>
+                </div>
+              <!-- Visualization for Top Fires by Acres Burned -->
+              <div class="container">
+                <div class="row">
+                  <div class="col-sm-2" style="max-height: 400px;"> -->
+                    <p>Select year to review: <select id="selYear"></select></p>
+                    <h4 style="text-align: center;">Top 10 fires<br>by Acres Burned</h4>
+                    <canvas id="myAcreChart"></canvas>
+                  </div>
+                                 
+                </div>
+            <!-- map image placeholder -->
+            <div class="row">
+              <div class="col-md-12">
+                <div id="map"></div>
+              </div>
+            </div>
+          </div>
+    </div>
+  <!-- Our JavaScript file -->
+  <!-- <script type="text/javascript" src="static/js/logic.js"></script> -->
+  <script type="text/javascript" src="static/js/largest_chart.js"></script>
+  <script type="text/javascript" src="static/js/duration_chart.js"></script>
+
+
+</body>
+
+</html>
+
+
