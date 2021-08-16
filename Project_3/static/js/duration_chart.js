@@ -22,13 +22,13 @@ d3.json("http://127.0.0.1:5000/longest_fires").then(function(data){
     };
 
     // Call when change takes place to the DOM
-    d3.select("#selYear").on("change", updateBarChart);
+    d3.select("#selYear").on("change", updateBarChartDuration);
  
     var myChart;
 
     uniqueYears = listYears(data);
     createDropDownMenu(uniqueYears);
-    createBarChart();
+    createBarChartDuration();
 
     function listYears(data) {
         for (i=0; i < data.features.length; i++) {
@@ -43,7 +43,7 @@ d3.json("http://127.0.0.1:5000/longest_fires").then(function(data){
         return uniqueYears.sort();
     };
 
-    function createBarChart() {
+    function createBarChartDuration() {
 
         // var dropdownMenu = d3.select("#selYear");
   
@@ -99,7 +99,7 @@ d3.json("http://127.0.0.1:5000/longest_fires").then(function(data){
         });
     };
 
-    function updateBarChart() {
+    function updateBarChartDuration() {
 
         var dropdownMenu = d3.select("#selYear");
   

@@ -20,13 +20,13 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
     };
 
     // Call when change takes place to the DOM
-    d3.select("#selYearAcres").on("change", updateBarChart);
+    d3.select("#selYearAcres").on("change", updateBarChartAcres);
  
     var myAcreChart;
 
     uniqueYears = listYears(data);
     createDropDownMenu(uniqueYears);
-    createBarChart();
+    createBarChartAcres();
 
     function listYears(data) {
         for (i=0; i < data.features.length; i++) {
@@ -41,7 +41,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
         return uniqueYears.sort();
     };
 
-    function createBarChart() {
+    function createBarChartAcres() {
 
         // var dropdownMenu = d3.select("#selYear");
   
@@ -80,7 +80,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
             data: {
                 labels: labels,
                 datasets: [{
-                    label: `Acres burned in ${selectedYear}, days`,
+                    label: `Acres burned in ${selectedYear}`,
                     data: values,
                     backgroundColor: "#d62728",
                     borderWidth: 1
@@ -97,7 +97,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
         });
     };
 
-    function updateBarChart() {
+    function updateBarChartAcres() {
 
         var dropdownMenu = d3.select("#selYearAcres");
   
@@ -128,7 +128,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
 
         myAcreChart.data.labels = labels;
         myAcreChart.data.datasets[0].data = values;
-        myAcreChart.data.datasets[0].label = `Acres burned in ${selectedYear}, acres:`;
+        myAcreChart.data.datasets[0].label = `Acres burned in ${selectedYear}`;
         myAcreChart.update()
     };
 })
