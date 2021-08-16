@@ -83,26 +83,26 @@ def byDuration():
     # Execute sql query 
     data_top_fires_duration = engine.execute(query_top_fires_duration)  
 
-    df_test = pd.read_sql(query_top_fires_duration, con=engine)
+    # df_test = pd.read_sql(query_top_fires_duration, con=engine)
 
     # Pull data table column names
     table_headers = engine.execute(query_top_fires_duration)._metadata.keys
 
     # convert to DF
-    df_top_fires_duration = pd.DataFrame(data_top_fires_duration, columns=table_headers)
+    df_top_fires_duration = pd.DataFrame(data_top_fires_duration, columns=table_headers).drop_duplicates()
     # df_top_fires_duration.head()
-
+    
     # Convert refined data frame to geoJSON format
-    top_fires_duration_geoJSON = df_to_geojson(df_test, 
-        df_test.drop(['latitude','longitude'], axis=1).columns)
+    top_fires_duration_geoJSON = df_to_geojson(df_top_fires_duration, 
+        df_top_fires_duration.drop(['latitude','longitude'], axis=1).columns)
     # top_fires_duration_geoJSON
 
     # Write geoJSON to json file for plotting
-    with open("fires4plotting.json", "w") as output:
+    with open("longest_fires.json", "w") as output:
         json.dump(top_fires_duration_geoJSON, output)
 
     return jsonify(top_fires_duration_geoJSON)
-
+    # return (f"Size of df: ,{df_top_fires_duration.shape}")
 
 @app.route("/largest_fires")
 def bySize():

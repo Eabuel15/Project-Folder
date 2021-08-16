@@ -22,7 +22,7 @@ d3.json(fire_data).then(function(data) {
 // var lend = data.features.length;
     console.log("logic_gjs");
 //     console.log(`${lend}`);
-    console.log(data);
+    console.log("Everything data: ", data);
 
   // for marker size use acresburned
   function markerSize(AcresBurned) {

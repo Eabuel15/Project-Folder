@@ -51,7 +51,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
         
         var labels = [];
         var values = [];
-        var selectedYear = 2013
+        var selectedYear = 2017
 
         for (i=0; i < data.features.length; i++) {
 

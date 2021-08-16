@@ -1,5 +1,7 @@
 d3.json("http://127.0.0.1:5000/longest_fires").then(function(data){
+// d3.json("longest_fires.json").then(function(data){
     // d3.json("http://127.0.0.1:5000/longest_fires").then(function(data){ 
+    console.log("First read: ", data);
     var uniqueYears = [];
  
     // Function to add year selections as HTML element
@@ -70,7 +72,7 @@ d3.json("http://127.0.0.1:5000/longest_fires").then(function(data){
             };
         
         };
-
+        console.log(labels, values);
         // console.log(`labels: ${labels}`)
         // console.log(`values: ${values}`)
 
