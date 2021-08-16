@@ -37,7 +37,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
                 uniqueYears.push(parseInt(year));
             }
         };
-        console.log(`Array of unique years: ${uniqueYears.sort()}`);
+        console.log(`Array of unique years by size: ${uniqueYears.sort()}`);
         return uniqueYears.sort();
     };
 
@@ -128,7 +128,7 @@ d3.json("http://127.0.0.1:5000/largest_fires").then(function(data){
 
         myAcreChart.data.labels = labels;
         myAcreChart.data.datasets[0].data = values;
-        myAcreChart.data.datasets[0].label = `Fire duration in ${selectedYear}, days`;
+        myAcreChart.data.datasets[0].label = `Acres burned in ${selectedYear}, acres:`;
         myAcreChart.update()
     };
 })

@@ -33,7 +33,7 @@ def df_to_geojson(df, properties, lat='latitude', lon='longitude'):
                 feature['properties'][prop] = row[prop]
         
             # add this feature (aka, converted dataframe row) to the list of features inside our dict
-            geojson['features'].append(feature)
+        geojson['features'].append(feature)
     
     return geojson
 
@@ -93,7 +93,7 @@ def byDuration():
     # df_top_fires_duration.head()
     
     # Convert refined data frame to geoJSON format
-    top_fires_duration_geoJSON = df_to_geojson(df_top_fires_duration, 
+    top_fires_duration_geoJSON = df_to_geojson(df_top_fires_duration,  
         df_top_fires_duration.drop(['latitude','longitude'], axis=1).columns)
     # top_fires_duration_geoJSON
 
@@ -102,7 +102,7 @@ def byDuration():
         json.dump(top_fires_duration_geoJSON, output)
 
     return jsonify(top_fires_duration_geoJSON)
-    # return (f"Size of df: ,{df_top_fires_duration.shape}")
+    # return (f"Size of df: ,{len(top_fires_duration_geoJSON['features'])}")
 
 @app.route("/largest_fires")
 def bySize():

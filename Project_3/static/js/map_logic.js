@@ -20,7 +20,6 @@ var fire_data = "http://127.0.0.1:5000/all_fires"
 // d3.csv(fire_csv).then(function(data) {
 d3.json(fire_data).then(function(data) {
 // var lend = data.features.length;
-    console.log("logic_gjs");
 //     console.log(`${lend}`);
     console.log("Everything data: ", data);
 

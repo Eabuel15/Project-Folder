@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>California Wildfires</title>
+  <title>Wildfires of California</title>
   
   <!-- D3 library -->
   <script src="https://d3js.org/d3.v5.min.js"></script>
@@ -12,103 +12,130 @@
    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
    crossorigin=""/>
 
-
   <!-- Leaflet JavaScript code -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
    integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
    crossorigin=""></script>
 
-  <!-- Leaflet JavaScript code -->
-  <!-- <script src="https://unpkg.com/leaflet@1.7.3/dist/leaflet.js"
-  integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-  crossorigin=""></script> -->
-
   <!-- Chart.js -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.5.0/chart.min.js" 
   integrity="sha512-asxKqQghC1oBShyhiBwA+YgotaSYKxGP1rcSYTDrB0U6DxwlJjU59B67U8+5/++uFjcuVM8Hh5cokLjZlhm3Vg==" 
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   
-  <!-- Our CSS -->
-  <link rel="stylesheet" type="text/css" href="static/css/style.css">
+<!-- Our CSS -->
+  <link rel="stylesheet" type="text/css" href="static/css/style_original.css">
   
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12 jumbotron text-center">
-                <h1>The Wildfires of California</h1>
-                <p>Use the interactive map below to explore our dataset.</p>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <!-- <div class="well">
-                  <select id="selDataset" onchange="optionChanged(this.value)"></select>
-                </div> -->
-                <div class="panel panel-primary">
-                  <div class="panel-heading">
-                    <h3 class="panel-title">Charts for Fires</h3>
-                  </div>
-                  <div id="features-properties" class="panel-body"></div>
-                </div>
-              </div>
-              <!-- Visualization for Top Fires by Duration -->
-              <div class="container">
-                <div class="row">                  
-                  <div class="col-md-5">
-                    <h4>Select year to review: <select id="selYear"></select></h4>
-                    <h4 style="text-align: center;">Top 10 fires in Dataset<br>by Duration</h4>
-                    <canvas id="myChart" style="height: 400px; max-width: 400px;"></canvas>
-                  </div>
-                  <div class="col-md-8 offset-md-2">
-                  </div>
-                </div>
-              <!-- Visualization for Top Fires by Acres Burned -->
-              
-              <div class="container-fluid">
-                <div class="row">
-                  <div class="col-md-5">
-                    <h4>Select year to review: <select id="selYearAcres"></select></h4>
-                    <h4 style="text-align: center;">Top 10 fires in Dataset<br>by Acres Burned</h4>
-                    <canvas id="myAcreChart" style="max-height: 400px; max-width: 400px;"></canvas>
-                  </div>
-                                 
-                </div>
-            <!-- map image placeholder -->
-            <div class="row">
-              <div class="col-md-12">
-                <div id="map"></div>
-              </div>
-            </div>
-          </div>
+  <div class="container" style="width: 100%; text-align: center;">
+    <div class="row" style="text-align: center;">
+      <div class="header" style="width: 100%;">
+        <h1>CALIFORNIA ON FIRE</h1>
+        <p>Use the below interactive dashboard to view key fire statistics<br>for the state of California between 2013 and 2019 </p>
+      </div>
     </div>
-    
-    <!-- Generate California Map -->
-    <h1>Map of California</h1>
-    <!-- <div id="map"></div> -->
-   
-    <h2>Select a Year</h2>
-    
-      <select id="selectYear">
-        <option value="1111">Select a Year</option>
-        <option value="2013">Year 2013</option>
-        <option value="2014">Year 2014</option>
-        <option value="2015">Year 2015</option>
-        <option value="2016">Year 2016</option>
-        <option value="2017">Year 2017</option>
-        <option value="2018">Year 2018</option>
-        <option value="2019">Year 2019</option>
-      </select>
-    <div id="map"></div>
-    
-      <!-- JavaScript file -->
-      <!-- <script type="text/javascript" src="logic.js"></script> -->
-      <!-- Our JavaScript file -->
+  </div>
+  <div class="container">
+    <div class="row" style="background-color: darkslategrey;">
+      <div class="col-lg-12" style="text-align: right; color:white">
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-lg-4" style="width: 20%;">
+        <div class="row">
+          <div class="col-sm-12">
+            <h4>Select year to review: <select id="selYear"></select></h4>
+            <h5 style="text-align: center;">Top Fires<br> by Duration</h5>
+            <canvas id="myChart" style="height:400px; width:400px"></canvas>
+          </div>
+          <div class="col-sm-12" style="text-align: center; vertical-align: middle; height: 400px; margin-left: 20px;">
+            <h4>Select year to review: <select id="selYearAcres"></select></h4>
+            <h5 style="text-align: center;">Top Fires <br>by Acres Burned</h5>
+            <canvas id="myAcreChart" style="height:400px; width:400px;"></canvas>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-8" style="padding: 10px">
+        <h2 style="text-size-adjust: 10;">Select a Year: </h2>
+        <select id="selectYear">
+           <option value="1111">Select a Year</option>
+           <option value="2013">Year 2013</option>
+           <option value="2014">Year 2014</option>
+           <option value="2015">Year 2015</option>
+           <option value="2016">Year 2016</option>
+           <option value="2017">Year 2017</option>
+           <option value="2018">Year 2018</option>
+           <option value="2019">Year 2019</option>
+         </select>
+        <div id="map" style="height: 100%;"></div>    
+      </div>
+  </div>
+  <!-- <div class="container">
+    <div class="row" style="text-align: column-center;">
+      <div class="col-md-12 jumbotron text-center" >
+        <h1>The Wildfires of California</h1>
+        <p>Use the interactive map below to explore our dataset.</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-md-2">
+       <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h5 class="panel-title">Charts for Fires</h5>
+       </div>
+       <div id="features-properties" class="panel-body"></div>
+    </div>
+  </div>
+<!-Visualization for Top Fires by Duration -->
+  <!-- <div class="container">
+    <div class="row">                  
+      <div class="col-md-4">
+        <h4>Select year to review: <select id="selYear"></select></h4>
+        <h5 style="text-align: center;">Top 10 fires in Dataset<br>by Duration</h5>
+          <canvas id="myChart" style="max-height: 400px; max-width: 400px;"></canvas>
+      </div>
+      <div class="col-md-8 offset-md-2">
+        <p>Hello Testing</p>
+      </div>
+    </div> -->
+<!-- Visualization for Top Fires by Acres Burned -->      
+        <!-- <div class="col-md-4">
+          <h4>Select year to review: <select id="selYearAcres"></select></h4>
+          <h5 style="text-align: center;">Top 10 fires in Dataset<br>by Acres Burned</h5>
+            <canvas id="myAcreChart" style="max-height: 400px; max-width: 400px;"></canvas>
+        </div>
+      </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-12">
+        <h2 style="text-size-adjust: 10;">Select a Year: </h2>
+        <select id="selectYear">
+           <option value="1111">Select a Year</option>
+           <option value="2013">Year 2013</option>
+           <option value="2014">Year 2014</option>
+           <option value="2015">Year 2015</option>
+           <option value="2016">Year 2016</option>
+           <option value="2017">Year 2017</option>
+           <option value="2018">Year 2018</option>
+           <option value="2019">Year 2019</option>
+         </select>
+        <div id="map"></div>
+      </div>
+    </div>
+  </div>
+</div> --> 
   <!-- <script type="text/javascript" src="static/js/logic.js"></script> -->
   <script type="text/javascript" src="static/js/largest_chart.js"></script>
   <script type="text/javascript" src="static/js/duration_chart.js"></script>
   <script type="text/javascript" src="static/js/map_logic.js"></script>
 
+  <!-- <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script> -->
 </body>
 
 </html>
